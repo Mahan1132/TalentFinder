@@ -1,0 +1,206 @@
+/* Reset layout and font */
+body, html, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    width: 100%;
+}
+
+/* Wrapper for full-page layout */
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* Container for all content */
+.home-container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* --- NAVIGATION BAR --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.logo {
+    color: #ff7e5f;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.nav-link:hover {
+    color: #ff7e5f;
+}
+
+.nav-button {
+    padding: 8px 16px;
+    background-color: #ff7e5f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.nav-button:hover {
+    background-color: #ff977b;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    padding: 50px 30px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.hero-section h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+/* --- SEARCH BAR --- */
+.search-bar {
+    padding: 12px;
+    width: 60%;
+    max-width: 500px;
+    border: none;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* --- CATEGORY BUTTONS --- */
+.category-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.category-btn {
+    background-color: white;
+    color: #ff7e5f;
+    border: 2px solid #ff7e5f;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.category-btn:hover {
+    background-color: #ff7e5f;
+    color: white;
+}
+
+/* --- RESULTS SECTION --- */
+.results-section {
+    padding: 20px 0;
+}
+
+.results-section h2 {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* --- PROFILE CARDS --- */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+.card {
+    width: 260px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+    padding: 24px 20px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: #ff7e5f;
+}
+
+.card-info {
+    text-align: center;
+}
+
+.card-info h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.card-info p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.visit-profile-btn {
+  background-color: #feb47b;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.visit-profile-btn:hover {
+  background-color: #ff7e5f;
+}
+
+.nav-user {
+  margin-right: 10px;
+  color: #fff;
+  font-weight: bold;
+}
