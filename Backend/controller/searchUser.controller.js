@@ -17,7 +17,7 @@ export async function searchUsers(req, res) {
   }
 }
 
-//single user ID for profile page
+//single user ID for profile page, fetch user's profile based on their user Id
 export async function getUserId(req, res) {
   try {
     const foundUser = await User.findById(req.params.id).select("-password");
