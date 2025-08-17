@@ -3,7 +3,6 @@ import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.routes.js";
 import dotenv from "dotenv";
 import cors from "cors";
-import experienceRoutes from "./routes/experience.routes.js";
 
 dotenv.config();
 
@@ -21,6 +20,6 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes); //Prefix all Route
 app.use("/api/user", userRoutes);
-app.use("/api/experience", experienceRoutes);
+// app.use("/api/experience", experienceRoutes);
 
 export default app;

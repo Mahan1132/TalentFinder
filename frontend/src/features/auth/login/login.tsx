@@ -1,69 +1,89 @@
-
-import { useState, type ChangeEvent, type FormEvent } from "react"
-import "./login.css"
+import "./login.css";
 import type { AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 import { loginApi } from "../../../shared/components/config/api";
+import { useForm } from "react-hook-form";
 
-export default function Login(){
-    const navigate = useNavigate();
+interface ILoginForm {
+  username: string;
+  password: string;
+}
 
-    const [formData, setFormData] = useState({username: '', password:''})
-    const [loading, setLoading] = useState(false)
-    
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => { 
-        const {name, value} = e.target;
-        setFormData({...formData, [name]: value})
+export default function Login() {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<ILoginForm>();
+
+  const onSubmit = async (data: ILoginForm) => {
+    try {
+      const res: AxiosResponse = await loginApi(data);
+
+      console.log("Login response:", res.data); //check backend payload here
+
+      const token = res.data.token;
+      const user = res.data.user || res.data.userData || null;
+
+      if (!token || !user) {
+        alert("Login failed: Missing user data.");
+        return;
+      }
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("currentUser", JSON.stringify(user));
+
+      navigate("/home");
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Login failed.");
+    } finally {
+      reset();
     }
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+  };
 
-        if (loading) {
-            return;
-        }
-        
-        setLoading(true);
-        loginApi(formData).then((res: AxiosResponse) => {
-            const token = res.data.token;
-            const user = res.data.user;
+  return (
+    <div className="login-wrapper">
+      <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+        <h2>Login</h2>
 
-            if(!token || !user) {
-                alert("Login failed: Missing user data.");
-                return;
-            }
+        {/* Username field */}
+        <input
+          id="username"
+          placeholder="Username"
+          {...register("username", { required: "Username is required" })}
+          type="text"
+        />
+        {errors.username && (
+          <div className="error-text">
+            {errors.username.message?.toString()}
+          </div>
+        )}
 
-            localStorage.setItem('token',token);
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            console.log("Logged in user:", user);
-            navigate('/home');
-        })
-        .catch((error) => {
-            console.error("Login error:", error);
-            alert("Login failed.");
-        })
-        .finally(() => {
-            setLoading(false);
-        });
-    //).catch{
-      //  (error: AxiosError) => {
-        //    const message = error.response?.data as String ?? 'Server Error'
-          //  renderToStaticMarkup.error(message)
-        //}
-    //}
+        {/* Password field */}
+        <input
+          id="password"
+          placeholder="Password"
+          {...register("password", { required: "Password is required" })}
+          type="password"
+        />
+        {errors.password && (
+          <div className="error-text">
+            {errors.password.message?.toString()}
+          </div>
+        )}
+
+        {/* Submit Button */}
+        <button disabled={isSubmitting} type="submit">
+          {isSubmitting ? "Logging in..." : "Login"}
+        </button>
+
+        <p className="register-text">
+          Don't have an account? <a href="/register">Register</a>
+        </p>
+      </form>
+    </div>
+  );
 }
-    return(
-        <div className="login-wrapper">
-            <form onSubmit={handleSubmit} className="login-form">
-                <h2>Login</h2>
-                <input onChange={handleChange} name="username" value={formData.username} placeholder="Username" type="text"/>
-                <input onChange={handleChange} name="password" value={formData.password} placeholder="Password" type="password"/>
-                <button type="submit">Submit</button>
-                <p className="register-text">
-                    Don't have an account? <a href="/register">Register</a>
-                </p>
-            </form>
-        </div>
-    )
-
-}
-

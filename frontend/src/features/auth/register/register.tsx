@@ -1,97 +1,116 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
 import "./register.css";
+import type { AxiosResponse } from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { registerApi } from "../../../shared/components/config/api";
 
+interface IRegisterForm {
+  username: string;
+  email: string;
+  password: string;
+  profession: string;
+  location: string;
+}
+
 export default function Register() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    profession: "",
-    location: "",
-  });
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<IRegisterForm>();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const onSubmit = async (data: IRegisterForm) => {
+    try {
+      const res: AxiosResponse = await registerApi(data);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (loading) return;
+      console.log("Register response:", res.data);
 
-    // localStorage.setItem('token', res.data.token);
-    //localStorage.setItem('currentUser', JSON.stringify(res.data.userData));
-
-    const { username, email, password, profession, location } = formData;
-    if (!username || !email || !password || !profession || !location) {
-      alert("Please fill out all fields before submitting.");
-      return;
+      alert("Registered Successfully.");
+      navigate("/login");
+    } catch (error: any) {
+      console.error("Register error:", error);
+      alert(
+        "Registration failed: " +
+          (error?.response?.data?.message || "Something went wrong.")
+      );
+    } finally {
+      reset();
     }
-
-    setLoading(true);
-
-    registerApi(formData)
-      .then(() => {
-        alert("Registered Successfully.");
-        navigate("/login");
-      })
-      .catch((error) => {
-        alert(
-          "Registration failed: " +
-            (error?.response?.data?.message || "Something went wrong.")
-        );
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   };
 
   return (
     <div className="register-wrapper">
-      <form onSubmit={handleSubmit} className="register-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="register-form">
         <h2>Register</h2>
+
+        {/* Username */}
         <input
-          onChange={handleChange}
-          name="username"
-          value={formData.username}
           placeholder="Username"
+          {...register("username", { required: "Username is required" })}
           type="text"
         />
+        {errors.username && (
+          <div className="error-text">
+            {errors.username.message?.toString()}
+          </div>
+        )}
+
+        {/* Email */}
         <input
-          onChange={handleChange}
-          name="email"
-          value={formData.email}
           placeholder="Email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" },
+          })}
           type="email"
         />
+        {errors.email && (
+          <div className="error-text">{errors.email.message?.toString()}</div>
+        )}
+
+        {/* Password */}
         <input
-          onChange={handleChange}
-          name="password"
-          value={formData.password}
           placeholder="Password"
+          {...register("password", { required: "Password is required" })}
           type="password"
         />
+        {errors.password && (
+          <div className="error-text">
+            {errors.password.message?.toString()}
+          </div>
+        )}
+
+        {/* Profession */}
         <input
-          onChange={handleChange}
-          name="profession"
-          value={formData.profession}
           placeholder="Profession"
+          {...register("profession", { required: "Profession is required" })}
           type="text"
         />
+        {errors.profession && (
+          <div className="error-text">
+            {errors.profession.message?.toString()}
+          </div>
+        )}
+
+        {/* Location */}
         <input
-          onChange={handleChange}
-          name="location"
-          value={formData.location}
           placeholder="Location"
+          {...register("location", { required: "Location is required" })}
           type="text"
         />
-        <button type="submit" disabled={loading}>
-          {loading ? "Registering..." : "Sign Up"}
+        {errors.location && (
+          <div className="error-text">
+            {errors.location.message?.toString()}
+          </div>
+        )}
+
+        {/* Submit Button */}
+        <button disabled={isSubmitting} type="submit">
+          {isSubmitting ? "Registering..." : "Sign Up"}
         </button>
+
         <p className="login-text">
           Already have an account? <Link to="/login">Login</Link>
         </p>
