@@ -139,9 +139,8 @@ export default function Home() {
 
                   <button
                     className="visit-profile-btn"
-                    onClick={() => navigate("/profile")}
+                    onClick={() => navigate(`/profile/${user._id}`)}
                   >
-                    {/* `/profile/${user._id}` */}
                     Visit Profile
                   </button>
                 </div>

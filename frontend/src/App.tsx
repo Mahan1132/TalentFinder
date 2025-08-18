@@ -47,7 +47,14 @@ function App() {
           </AuthGuard>
         }
       />
-      <Route path="/profile" element={<Profile />} />
+      <Route
+        path="/profile/:id"
+        element={
+          <AuthGuard>
+            <Profile />
+          </AuthGuard>
+        }
+      />
       <Route path="/notFound" element={<NotFound />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
