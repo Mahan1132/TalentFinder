@@ -1,4 +1,3 @@
-// backend/controller/experience.controller.js
 import Experience from "../models/experience.model.js";
 
 export async function addExperience(req, res) {
