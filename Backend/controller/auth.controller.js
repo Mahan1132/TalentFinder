@@ -8,20 +8,14 @@ import User from "../models/user.model.js";
 export async function register(req, res) {
   try {
     const { username, email, password, profession, location } = req.body;
-
-    const existing = await User.findOne(
-      { username },
-      { email },
-      { profession },
-      { location }
-    );
-    if (existing)
+    const existing = await User.findOne({ $or: [{ username }, { email }] });
+    if (existing) {
       return res
         .status(400)
-        .send({ message: "Username or email already exists" });
+        .json({ message: "Username or email already exists" });
+    }
 
-    const hashedPassword = await bcrypt.hash(password, 10); //bcrypt le pass lai hash garcha,10 bhane ko hash kattiko secure rakhne
-
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
       username,
       email,
@@ -30,11 +24,39 @@ export async function register(req, res) {
       location,
     });
     await user.save();
+
+    return res.status(201).json({ message: "User registered successfully" });
   } catch (e) {
-    return res.status(500).send(e);
-  } finally {
-    res.status(201).json({ message: "User registered successfully " });
+    return res
+      .status(500)
+      .json({ message: "Registration failed", error: e.message });
   }
+
+  //   const existing = await User.findOne(
+  //     { username },
+  //     { email },
+  //     { profession },
+  //     { location }
+  //   );
+  //   if (existing)
+  //     return res
+  //       .status(400)
+  //       .send({ message: "Username or email already exists" });
+
+  //   const hashedPassword = await bcrypt.hash(password, 10); //bcrypt le pass lai hash garcha,10 bhane ko hash kattiko secure rakhne
+
+  //   const user = new User({
+  //     username,
+  //     email,
+  //     password: hashedPassword,
+  //     profession,
+  //     location,
+  //   });
+  //   await user.save();
+  // } catch (e) {
+  //   return res.status(500).send(e);
+  // } finally {
+  //   res.status(201).json({ message: "User registered successfully " });
 }
 
 export async function login(req, res) {
