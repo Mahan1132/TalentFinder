@@ -28,16 +28,17 @@ export default function ExperienceList({
 
   return (
     <div className="experience-section">
+      {/* Section Title */}
       <h2 className="experience-title">Experience</h2>
 
-      {/* Add Experience (if self) */}
+      {/* Add Experience Form (only if it's your own profile) */}
       {isSelf && (
         <div className="experience-form">
           <AddExperience setExperiences={setExperiences} />
         </div>
       )}
 
-      {/* Experience Cards */}
+      {/* Experience List */}
       <div className="experience-list">
         {experiences.length > 0 ? (
           experiences.map((exp) => (

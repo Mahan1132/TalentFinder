@@ -67,12 +67,6 @@ export default function Home() {
             <a href="/home" className="nav-link">
               Home
             </a>
-            <a href="#" className="nav-link">
-              About
-            </a>
-            <a href="#" className="nav-link">
-              Contact
-            </a>
             {user ? (
               <button
                 className="nav-button"
