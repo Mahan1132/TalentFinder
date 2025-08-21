@@ -29,8 +29,9 @@
   margin-bottom: 10px;
 }
 
-/* Inputs */
-.register-form input {
+/* Inputs + Dropdown */
+.register-form input,
+.register-form select {
   width: 100%;
   padding: 12px 15px;
   border-radius: 10px;
@@ -41,7 +42,8 @@
   transition: border 0.2s ease-in-out, background 0.2s;
 }
 
-.register-form input:focus {
+.register-form input:focus,
+.register-form select:focus {
   border-color: #ff7e5f;
   background-color: #fff;
 }

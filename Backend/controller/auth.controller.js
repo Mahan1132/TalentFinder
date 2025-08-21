@@ -7,7 +7,8 @@ import User from "../models/user.model.js";
 
 export async function register(req, res) {
   try {
-    const { username, email, password, profession, location } = req.body;
+    const { username, email, password, profession, location, employmentType } =
+      req.body;
     const existing = await User.findOne({ $or: [{ username }, { email }] });
     if (existing) {
       return res
@@ -22,6 +23,7 @@ export async function register(req, res) {
       password: hashedPassword,
       profession,
       location,
+      employmentType,
     });
     await user.save();
 

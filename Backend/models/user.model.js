@@ -1,21 +1,3 @@
-// import { Schema, model } from "mongoose";
-
-// const userSchema = new Schema({
-//   username: String,
-//   email: String,
-//   password: String,
-//   profession: String,
-//   location: String,
-//   createdAt: {
-//     type: Date,
-//     default: Date.now,
-//   },
-// });
-
-// const User = model("User", userSchema);
-// export default User;
-
-// backend/models/user.model.js
 import { Schema, model } from "mongoose";
 
 const userSchema = new Schema({
@@ -24,6 +6,11 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   profession: String,
   location: String,
+  employmentType: {
+    type: String,
+    enum: ["Freelancer", "Full-time", "Part-time"],
+    required: true,
+  },
   bio: { type: String, default: "" },
   skills: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },

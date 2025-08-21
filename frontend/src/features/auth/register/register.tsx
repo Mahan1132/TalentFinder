@@ -10,6 +10,7 @@ interface IRegisterForm {
   password: string;
   profession: string;
   location: string;
+  employmentType: string;
 }
 
 export default function Register() {
@@ -103,6 +104,26 @@ export default function Register() {
         {errors.location && (
           <div className="error-text">
             {errors.location.message?.toString()}
+          </div>
+        )}
+
+        {/* Employment Type (Dropdown) */}
+        <select
+          {...register("employmentType", {
+            required: "Employment type is required",
+          })}
+          defaultValue=""
+        >
+          <option value="" disabled>
+            Select Employment Type
+          </option>
+          <option value="Freelancer">Freelancer</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+        </select>
+        {errors.employmentType && (
+          <div className="error-text">
+            {errors.employmentType.message?.toString()}
           </div>
         )}
 

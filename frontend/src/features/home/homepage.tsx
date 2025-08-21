@@ -12,6 +12,7 @@ interface IUser {
   email?: string;
   profession?: string;
   location?: string;
+  employmentType?: string;
 }
 
 interface IUserResponse {
@@ -21,9 +22,6 @@ interface IUserResponse {
 export default function Home() {
   const navigate = useNavigate();
 
-  // const user: IUser | null = JSON.parse(localStorage.getItem("currentUser") || "null");
-
-  // const user: IUser = JSON.parse(localStorage.getItem('currentUser')!);
   let user: IUser | null = null;
   const userString = localStorage.getItem("currentUser");
   try {
@@ -50,7 +48,6 @@ export default function Home() {
 
   //filter by category
   const handleCategoryClick = (category: string) => {
-    //onValueChange
     if (category == "All") setSearch("");
     else setSearch(category);
   };
@@ -90,7 +87,8 @@ export default function Home() {
         <header className="hero-section">
           <h1>Find the Perfect Professional</h1>
           <p>
-            Discover talented professionals and explore their amazing portfolios
+            Discover talented IT professionals and explore their amazing
+            portfolios
           </p>
           <input
             type="text"
@@ -102,11 +100,11 @@ export default function Home() {
           <div className="category-buttons">
             {[
               "All",
-              "Designer",
-              "Developer",
-              "Photographer",
-              "Marketer",
-              "Consultant",
+              "QA Engineer",
+              "Web Developer",
+              "Software Engineer",
+              "Full Stack Developer",
+              "Django Developer",
             ].map((category) => (
               <button
                 key={category}
@@ -126,16 +124,23 @@ export default function Home() {
             {userList.map((user) => (
               <div key={user._id} className="card">
                 <div className="card-info">
-                  <h3>{user.username}</h3>
+                  <div className="card-header">
+                    <h3>{user.username}</h3>
+                    <span className="employment-badge">
+                      {user.employmentType ?? "--"}
+                    </span>
+                  </div>
                   <h5>{user.profession ?? "--"}</h5>
-                  <p>{user.location ?? "--"}</p>
 
-                  <button
-                    className="visit-profile-btn"
-                    onClick={() => navigate(`/profile/${user._id}`)}
-                  >
-                    View
-                  </button>
+                  <div className="card-footer">
+                    <p>{user.location ?? "--"}</p>
+                    <button
+                      className="visit-profile-btn"
+                      onClick={() => navigate(`/profile/${user._id}`)}
+                    >
+                      View
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

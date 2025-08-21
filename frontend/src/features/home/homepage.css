@@ -1,10 +1,8 @@
-/* Reset layout and font */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 body,
 html,
 #root {
@@ -12,23 +10,17 @@ html,
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
   width: 100%;
-}
-
-/* Wrapper */
+} /* Wrapper */
 .page-wrapper {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   padding: 40px 20px;
-}
-
-/* Main container */
+} /* Main container */
 .home-container {
   width: 100%;
   max-width: 1200px;
-}
-
-/* --- NAVIGATION BAR --- */
+} /* --- NAVIGATION BAR --- */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -41,31 +33,26 @@ html,
   flex-wrap: wrap;
   gap: 10px;
 }
-
 .logo {
   color: #ff7e5f;
   font-weight: 700;
   font-size: 1.8rem;
 }
-
 .nav-right {
   display: flex;
   gap: 20px;
   align-items: center;
   flex-wrap: wrap;
 }
-
 .nav-link {
   text-decoration: none;
   color: #333;
   font-weight: 500;
   transition: 0.2s;
 }
-
 .nav-link:hover {
   color: #ff7e5f;
 }
-
 .nav-button {
   padding: 8px 16px;
   background-color: #ff7e5f;
@@ -76,12 +63,9 @@ html,
   font-weight: 500;
   transition: background-color 0.2s ease;
 }
-
 .nav-button:hover {
   background-color: #ff977b;
-}
-
-/* --- HERO SECTION --- */
+} /* --- HERO SECTION --- */
 .hero-section {
   background: linear-gradient(to right, #ff7e5f, #feb47b);
   color: white;
@@ -90,17 +74,14 @@ html,
   border-radius: 12px;
   margin-bottom: 40px;
 }
-
 .hero-section h1 {
   font-size: 2.6rem;
   margin-bottom: 10px;
 }
-
 .hero-section p {
   font-size: 1.2rem;
   margin-bottom: 25px;
 }
-
 .search-bar {
   padding: 12px;
   width: 100%;
@@ -110,16 +91,13 @@ html,
   margin-bottom: 20px;
   font-size: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-/* Category Buttons */
+} /* Category Buttons */
 .category-buttons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
 }
-
 .category-btn {
   background-color: white;
   color: #ff7e5f;
@@ -130,35 +108,27 @@ html,
   font-weight: 600;
   transition: background-color 0.2s, color 0.2s;
 }
-
 .category-btn:hover {
   background-color: #ff7e5f;
   color: white;
-}
-
-/* --- RESULTS SECTION --- */
+} /* --- RESULTS SECTION --- */
 .results-section {
   background-color: #fff;
   border-radius: 12px;
   padding: 30px 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
-
 .results-section h2 {
   text-align: center;
   font-size: 1.6rem;
   margin-bottom: 30px;
   color: #333;
-}
-
-/* --- CARD GRID --- */
+} /* --- CARD GRID --- */
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 24px;
-}
-
-/* --- USER CARD --- */
+} /* --- USER CARD --- */
 .card {
   background-color: #ffffff;
   border: 1px solid #ffe0d2;
@@ -167,19 +137,16 @@ html,
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
-
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
-
 .card-info h3 {
   font-size: 1.3rem;
   color: #333;
   margin-bottom: 10px;
   font-weight: 600;
 }
-
 .card-info p {
   font-size: 0.95rem;
   color: #555;
@@ -190,79 +157,91 @@ html,
   margin: 6px 0;
   font-weight: 500;
 }
-
-/* Visit Button */
+.card-header {
+  display: flex;
+  justify-content: space-between; /* name left, type right */
+  align-items: center;
+  margin-bottom: 8px;
+}
+.employment-badge {
+  background-color: #fff3ee;
+  color: #ff7e5f;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+} /* Visit Button */
 .visit-profile-btn {
-  display: block;
-  padding: 10px 16px;
+  padding: 8px 14px;
   background-color: #ff7e5f;
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
 }
-
 .visit-profile-btn:hover {
   background-color: #ff977b;
-  transform: scale(1.03);
-}
-
-/* --- RESPONSIVE DESIGN --- */
+  transform: scale(1.05);
+} /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
   .hero-section h1 {
     font-size: 2rem;
   }
-
   .hero-section p {
     font-size: 1rem;
   }
-
   .search-bar {
     width: 90%;
   }
-
   .navbar {
     flex-direction: column;
     align-items: flex-start;
   }
-
   .nav-right {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     gap: 10px;
   }
-
   .card-info h3 {
     font-size: 1.1rem;
   }
-
   .visit-profile-btn {
     font-size: 0.9rem;
   }
 }
-
 @media (max-width: 480px) {
   .hero-section h1 {
     font-size: 1.6rem;
   }
-
   .hero-section p {
     font-size: 0.95rem;
   }
-
   .card-container {
     grid-template-columns: 1fr;
   }
-
   .results-section h2 {
     font-size: 1.3rem;
   }
-
   .card {
     padding: 20px;
   }
+}
+.card-footer {
+  display: flex;
+  justify-content: space-between; /* location left, button right */
+  align-items: center;
+  margin-top: 12px;
+}
+.card-footer p {
+  font-size: 0.95rem;
+  color: #555;
+  background-color: #fff3ee;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  margin: 0;
 }
