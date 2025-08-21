@@ -8,6 +8,8 @@ import {
   searchUsers,
   updateUser,
 } from "../controller/searchUser.controller.js";
+import { uploadProfilePic } from "../controller/profile-picture.controller.js";
+import { upload } from "../middleware/image-uploader.middleware.js";
 
 //get all users
 router.get("/getAllUsers", authMiddleware, getAllUsers);
@@ -20,5 +22,12 @@ router.get("/:id", authMiddleware, getUserId);
 
 //update own profile
 router.put("/:id", authMiddleware, updateUser);
+
+router.patch(
+  "/uploadProfilePic",
+  authMiddleware, //checkToken
+  upload.single("image"),
+  uploadProfilePic
+);
 
 export default router;

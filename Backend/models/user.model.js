@@ -27,6 +27,12 @@ const userSchema = new Schema({
   bio: { type: String, default: "" },
   skills: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },
+  profilePicture: {
+    url: {
+      type: String,
+    },
+    public_id: { type: String },
+  },
 });
 
 const User = model("User", userSchema);
