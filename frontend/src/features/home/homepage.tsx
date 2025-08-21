@@ -133,15 +133,14 @@ export default function Home() {
               <div key={user._id} className="card">
                 <div className="card-info">
                   <h3>{user.username}</h3>
-                  <p>{user.email ?? "--"}</p>
-                  <p>{user.profession ?? "--"}</p>
+                  <h5>{user.profession ?? "--"}</h5>
                   <p>{user.location ?? "--"}</p>
 
                   <button
                     className="visit-profile-btn"
                     onClick={() => navigate(`/profile/${user._id}`)}
                   >
-                    Visit Profile
+                    View
                   </button>
                 </div>
               </div>

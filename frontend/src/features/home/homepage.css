@@ -193,7 +193,7 @@ html,
 
 /* Visit Button */
 .visit-profile-btn {
-  display: inline-block;
+  display: block;
   margin-top: 16px;
   padding: 10px 16px;
   background-color: #ff7e5f;
