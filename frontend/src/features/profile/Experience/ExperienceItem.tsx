@@ -1,5 +1,5 @@
-import { deleteExperienceApi } from "../../shared/components/config/api";
-import type { IExperience } from "../../types";
+import { deleteExperienceApi } from "../../../shared/components/config/api";
+import type { IExperience } from "../../../types";
 import type { Dispatch, SetStateAction } from "react";
 
 interface IProps {

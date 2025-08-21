@@ -5,8 +5,8 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
-import type { IExperience } from "../../types";
-import { addExperienceApi } from "../../shared/components/config/api";
+import type { IExperience } from "../../../types";
+import { addExperienceApi } from "../../../shared/components/config/api";
 
 interface IProps {
   setExperiences: Dispatch<SetStateAction<IExperience[]>>;

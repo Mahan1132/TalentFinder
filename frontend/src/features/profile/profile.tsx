@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import EditProfile from "./EditProfile";
-import ExperienceList from "./ExperienceList";
+import ExperienceList from "./Experience/ExperienceList";
 import UploadProfilePicture from "./UploadProfilePicture";
 import type { IUser } from "../../types";
 import { getUserByIdApi } from "../../shared/components/config/api";

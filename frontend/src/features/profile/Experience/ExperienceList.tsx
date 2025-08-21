@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ExperienceItem from "./ExperienceItem";
 import AddExperience from "./AddExperience";
-import type { IExperience } from "../../types";
-import { getUserExperiencesApi } from "../../shared/components/config/api";
+import type { IExperience } from "../../../types";
+import { getUserExperiencesApi } from "../../../shared/components/config/api";
 
 interface IExperienceListProps {
   userId: string;
