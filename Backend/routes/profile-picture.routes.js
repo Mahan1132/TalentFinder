@@ -1,11 +1,15 @@
-import express from "express";
-import { upload } from "../middleware/image-uploader.middleware.js";
+import { Router } from "express";
 import { uploadProfilePic } from "../controllers/profile-picture.controller.js";
-import { authMiddleware } from "../middleware/auth.middleware.js";
+import { upload } from "../middleware/image-uploader.middleware.js";
+import { authMiddleware } from "../middleware/auth.middleware.js"; // if using auth
 
-const router = express.Router();
+const router = Router();
 
-// POST /api/profile-picture
-router.post("/", authMiddleware, upload.single("file"), uploadProfilePic);
+router.patch(
+  "/upload",
+  authMiddleware,
+  upload.single("image"),
+  uploadProfilePic
+);
 
 export default router;

@@ -1,41 +1,45 @@
-// src/features/profile/UploadProfilePicture.tsx
-
 import { useState } from "react";
-import { uploadProfilePictureApi } from "../../shared/components/config/api";
+import { updateProfilePicApi } from "../../shared/components/config/api";
 import type { IUser } from "../../types";
 
 interface IProps {
   setUserData: React.Dispatch<React.SetStateAction<IUser | null>>;
+  onUploadSuccess?: (newPic: { url: string; public_id: string }) => void; // ✅ Added this
 }
 
-export default function UploadProfilePicture({ setUserData }: IProps) {
-  const [loading, setLoading] = useState(false);
+export default function UploadProfilePicture({
+  setUserData,
+  onUploadSuccess,
+}: IProps) {
+  const [uploading, setUploading] = useState(false);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const formData = new FormData();
-    formData.append("profilePicture", file);
-
-    setLoading(true);
+    setUploading(true);
     try {
-      const res = await uploadProfilePictureApi(formData);
-      // ✅ update only the profilePicture in userData
+      const res = await updateProfilePicApi(file);
+      const newPic = res.data.image; // ✅ Backend sends { success, image: {url, public_id} }
+
+      // Update userData state
       setUserData((prev) =>
-        prev ? { ...prev, profilePicture: res.data.image } : prev
+        prev ? { ...prev, profilePicture: newPic } : prev
       );
+
+      // Call the callback if provided
+      if (onUploadSuccess) onUploadSuccess(newPic); // ✅ Trigger callback after success
     } catch (err) {
-      console.error("Upload failed:", err);
+      console.error("Error uploading image:", err);
     } finally {
-      setLoading(false);
+      setUploading(false);
     }
   };
 
   return (
-    <div className="upload-profile-pic">
-      <label>
-        {loading ? "Uploading..." : "Change Profile Picture"}
+    <div className="upload-profile-picture">
+      <label className="upload-label">
+        {uploading ? "Uploading..." : "Change Profile Picture"}
         <input
           type="file"
           accept="image/*"

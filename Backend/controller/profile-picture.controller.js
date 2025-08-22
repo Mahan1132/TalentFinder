@@ -7,13 +7,13 @@ import cloudinary from "../config/cloudinary.config.js";
 
 export async function uploadProfilePic(req, res) {
   try {
-    if (!req.file) throw new console.error("No file uploaded");
+    if (!req.file) throw new Error("No file uploaded");
 
     const result = await uploadBufferToCloudinary(req.file.buffer, {
       folder: "profilepic",
       public_id: `user_${req.user.id}`,
       transformation: [
-        { width: 1600, height: 1600, crops: "fill", gravity: "auto" },
+        { width: 1600, height: 1600, crop: "fill", gravity: "auto" },
         { quality: "auto", fetch_format: "auto" },
       ],
     });

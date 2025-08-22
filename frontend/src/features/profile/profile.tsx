@@ -8,6 +8,8 @@ import UploadProfilePicture from "./UploadProfilePicture";
 import type { IUser } from "../../types";
 import { getUserByIdApi } from "../../shared/components/config/api";
 import "./profile.css";
+import EducationList from "./Education/EducationList";
+import AddEducation from "./Education/AddEducation";
 
 interface IUserResponse {
   user: IUser;
@@ -45,6 +47,14 @@ export default function Profile() {
       .toUpperCase();
   };
 
+  // UPDATED: Callback to update profile picture after upload
+  const handleProfilePicUpdate = (newPic: {
+    url: string;
+    public_id: string;
+  }) => {
+    setUserData((prev) => (prev ? { ...prev, profilePicture: newPic } : prev));
+  }; // UPDATED
+
   return (
     <div className="profile-container">
       {/* Back Button */}
@@ -65,7 +75,12 @@ export default function Profile() {
         <h1>{userData.username}'s Profile</h1>
 
         {/* Show upload option only for self */}
-        {isSelf && <UploadProfilePicture setUserData={setUserData} />}
+        {isSelf && (
+          <UploadProfilePicture
+            setUserData={setUserData}
+            onUploadSuccess={handleProfilePicUpdate} // UPDATED
+          />
+        )}
       </div>
 
       {/* Profile Info */}
@@ -85,11 +100,28 @@ export default function Profile() {
         )}
       </div>
 
-      {/* Edit Profile (only if it's your own profile) */}
+      {/* Edit Profile (only if self) */}
       {isSelf && <EditProfile userData={userData} setUserData={setUserData} />}
 
-      {/* Experience Section */}
+      {/* Experience Section (from 2nd code) */}
       <ExperienceList userId={userData._id} isSelf={isSelf} />
+
+      {/* Education Section */}
+      <div className="education-section">
+        <h3 className="education-title">Education</h3>
+
+        {/* Add Education Form (only if self) */}
+        {isSelf && (
+          <div className="education-form">
+            <AddEducation setEducations={() => {}} />
+          </div>
+        )}
+
+        {/* Education List */}
+        <div className="education-list">
+          <EducationList userId={userData._id} isSelf={isSelf} />
+        </div>
+      </div>
     </div>
   );
 }

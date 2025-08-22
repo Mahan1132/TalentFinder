@@ -20,3 +20,13 @@ export interface IExperience {
   endDate?: string;
   description?: string;
 }
+
+export interface IEducation {
+  _id: string;
+  degree: string;
+  school: string;
+  board?: string;
+  address?: string;
+  startDate: string;
+  endDate?: string;
+}

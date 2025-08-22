@@ -1,5 +1,5 @@
 import axiosInstance from "../axiosInstance";
-import type { IUser, IExperience } from "../../../types";
+import type { IUser, IExperience, IEducation } from "../../../types";
 
 export function loginApi(data: { username: string; password: string }) {
   return axiosInstance.post("/auth/login", data);
@@ -51,12 +51,29 @@ export const deleteExperienceApi = (id: string) => {
   return axiosInstance.delete<{ message: string }>(`/experience/${id}`);
 };
 
-export const uploadProfilePictureApi = (formData: FormData) => {
-  return axiosInstance.post<{ image: { url: string; public_id: string } }>(
-    "/profile-picture",
-    formData,
-    {
-      headers: { "Content-Type": "multipart/form-data" },
-    }
-  );
+// update profile picture
+export const updateProfilePicApi = (file: File | Blob) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  return axiosInstance.patch("/profile-picture/upload", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
+
+// education api
+export const addEducationApi = (data: Omit<IEducation, "_id">) => {
+  return axiosInstance.post<{ education: IEducation }>("/education", data);
+};
+
+export const getUserEducationApi = (userId: string) => {
+  return axiosInstance.get<{ education: IEducation[] }>(`/education/${userId}`);
+};
+
+export const updateEducationApi = (id: string, data: Partial<IEducation>) => {
+  return axiosInstance.put<{ education: IEducation }>(`/education/${id}`, data);
+};
+
+export const deleteEducationApi = (id: string) => {
+  return axiosInstance.delete<{ message: string }>(`/education/${id}`);
 };

@@ -14,7 +14,7 @@
  */
 .back-button {
   margin-bottom: 1rem;
-  color: #2563eb;
+  color: #ff7e5f;
   background: transparent;
   border: none;
   font-size: 1rem;
@@ -133,22 +133,22 @@ form button {
 
 /* Edit Profile Button */
 .edit-profile-form button {
-  background: #3b82f6;
+  background: #ff977b;
   color: #fff;
 }
 
 .edit-profile-form button:hover {
-  background: #2563eb;
+  background: #ff7e5f;
 }
 
 /* Experience Button */
 .experience-form button {
-  background: #007bff;
+  background: #ff977b;
   color: #fff;
 }
 
 .experience-form button:hover {
-  background: #2563eb;
+  background: #ff7e5f;
 }
 
 /* 
@@ -231,7 +231,7 @@ form button {
 
 /* Action Buttons */
 .toggle-edit-btn {
-  background: #007bff;
+  background: #ff977b;
   color: white;
   padding: 8px 14px;
   border: none;
@@ -242,7 +242,7 @@ form button {
 }
 
 .toggle-edit-btn:hover {
-  background: #0056b3;
+  background: #ff7e5f;
 }
 
 .delete-btn {
@@ -260,7 +260,7 @@ form button {
 }
 
 .edit-btn {
-  background: #1677ff;
+  background: #ff977b;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -270,7 +270,7 @@ form button {
 }
 
 .edit-btn:hover {
-  background: #0958d9;
+  background: #ff7e5f;
 }
 
 .save-btn {
@@ -354,7 +354,7 @@ form button {
 }
 
 .upload-btn {
-  background: #007bff;
+  background: #ff977b;
   color: white;
   padding: 0.4rem 0.8rem;
   border-radius: 8px;
@@ -364,5 +364,36 @@ form button {
 }
 
 .upload-btn:hover {
-  background: #0056b3;
+  background: #ff7e5f;
+}
+
+.education-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Section Title */
+.education-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+  color: #333;
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 0.5rem;
+}
+
+/* Add Experience Form */
+.education-form {
+  margin-bottom: 1.5rem;
+}
+
+/* Experience List inside section */
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

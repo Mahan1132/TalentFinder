@@ -1,25 +1,25 @@
-// AddExperience.tsx
+// AddEducation.tsx
 import {
   useState,
   type ChangeEvent,
   type Dispatch,
   type SetStateAction,
 } from "react";
-import type { IExperience } from "../../../types";
-import { addExperienceApi } from "../../../shared/components/config/api";
+import type { IEducation } from "../../../types";
+import { addEducationApi } from "../../../shared/components/config/api";
 
 interface IProps {
-  setExperiences: Dispatch<SetStateAction<IExperience[]>>;
+  setEducations: Dispatch<SetStateAction<IEducation[]>>;
 }
 
-export default function AddExperience({ setExperiences }: IProps) {
+export default function AddEducation({ setEducations }: IProps) {
   const [formData, setFormData] = useState({
-    title: "",
-    company: "",
-    location: "",
+    degree: "",
+    school: "",
+    board: "",
+    address: "",
     startDate: "",
     endDate: "",
-    description: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -30,30 +30,32 @@ export default function AddExperience({ setExperiences }: IProps) {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((fd) => ({ ...fd, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (loading) return;
     setLoading(true);
     setMessage(null);
 
     try {
-      const res = await addExperienceApi(formData as unknown as IExperience);
-      setExperiences((prev) => [res.data.experience, ...prev]);
-      setMessage("Experience added successfully!");
+      const res = await addEducationApi(formData as unknown as IEducation);
+      // Add the new education to the top of the list
+      setEducations((prev) => [res.data.education, ...prev]);
+      setMessage("Education added successfully!");
       setFormData({
-        title: "",
-        company: "",
-        location: "",
+        degree: "",
+        school: "",
+        board: "",
+        address: "",
         startDate: "",
         endDate: "",
-        description: "",
       });
       setIsOpen(false);
     } catch (err) {
-      console.error("Add experience failed:", err);
-      setMessage("Failed to add experience.");
+      console.error("Add education failed:", err);
+      setMessage("Failed to add education.");
     } finally {
       setLoading(false);
     }
@@ -61,49 +63,53 @@ export default function AddExperience({ setExperiences }: IProps) {
 
   return (
     <div>
-      {/* Plain button - no box */}
+      {/* Toggle button */}
       <button className="toggle-edit-btn" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? "Cancel" : "Add Experience"}
+        {isOpen ? "Cancel" : "Add Education"}
       </button>
 
-      {/* Form inside card/box */}
+      {/* Form inside collapsible box */}
       {isOpen && (
-        <div className="experience-box">
-          <form
-            className="edit-profile-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
+        <div className="education-box">
+          <form className="edit-profile-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Job Title</label>
+              <label>Degree</label>
               <input
-                name="title"
-                placeholder="e.g. Software Engineer"
-                value={formData.title}
+                name="degree"
+                placeholder="e.g. BSc Computer Science"
+                value={formData.degree}
                 onChange={handleChange}
                 required
               />
             </div>
 
             <div className="form-group">
-              <label>Company</label>
+              <label>School/College</label>
               <input
-                name="company"
-                placeholder="e.g. Google"
-                value={formData.company}
+                name="school"
+                placeholder="e.g. Islington College"
+                value={formData.school}
                 onChange={handleChange}
                 required
               />
             </div>
 
             <div className="form-group">
-              <label>Location</label>
+              <label>Board</label>
               <input
-                name="location"
-                placeholder="e.g. San Francisco, CA"
-                value={formData.location}
+                name="board"
+                placeholder="e.g. Cambridge"
+                value={formData.board}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Address</label>
+              <input
+                name="address"
+                placeholder="e.g. Kathmandu, Nepal"
+                value={formData.address}
                 onChange={handleChange}
               />
             </div>
@@ -130,18 +136,8 @@ export default function AddExperience({ setExperiences }: IProps) {
               </div>
             </div>
 
-            <div className="form-group">
-              <label>Description</label>
-              <textarea
-                name="description"
-                placeholder="Describe your role and achievements"
-                value={formData.description}
-                onChange={handleChange}
-              />
-            </div>
-
             <button type="submit" disabled={loading}>
-              {loading ? "Adding..." : "Add Experience"}
+              {loading ? "Adding..." : "Add Education"}
             </button>
           </form>
 

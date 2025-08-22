@@ -13,7 +13,7 @@ export const upload = multer({
 });
 
 //Upload buffer to cloudinary
-export function uploadBufferToCloudinary(buffer, option = {}) {
+export function uploadBufferToCloudinary(buffer, options = {}) {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       { resource_type: "image", ...options },
