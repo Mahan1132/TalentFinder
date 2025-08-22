@@ -1,5 +1,3 @@
-// src/features/profile/Profile.tsx
-
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import EditProfile from "./EditProfile";

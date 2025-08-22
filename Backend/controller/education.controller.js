@@ -10,7 +10,6 @@ export const addEducation = async (req, res) => {
     console.log("req.user:", req.user);
     console.log("req.body:", req.body);
 
-    // Use authenticated user OR fallback to body.user
     const userId = req.user?.id || user;
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
@@ -31,7 +30,7 @@ export const addEducation = async (req, res) => {
     console.error("Add education error:", err);
     res.status(500).json({
       message: "Failed to add education",
-      error: err.message, // return actual error for debugging
+      error: err.message,
     });
   }
 };
