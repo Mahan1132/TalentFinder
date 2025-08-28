@@ -52,6 +52,7 @@ export async function updateExperience(req, res) {
   }
 }
 
+//delete experience
 export async function deleteExperience(req, res) {
   try {
     const { id } = req.params;
